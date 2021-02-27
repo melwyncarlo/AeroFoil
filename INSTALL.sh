@@ -15,6 +15,7 @@ wget --no-check-certificate -P ~/.FreeCAD/Macro/AeroFoil_UI_Files https://raw.gi
 wget --no-check-certificate -P ~/.FreeCAD/Macro/AeroFoil_UI_Files https://raw.githubusercontent.com/melwyncarlo/AeroFoil/main/AeroFoil_UI_Files/AeroFoil_Dialog_3.ui
 wget --no-check-certificate -P ~/.FreeCAD/Macro/AeroFoil_UI_Files https://raw.githubusercontent.com/melwyncarlo/AeroFoil/main/AeroFoil_UI_Files/AeroFoil_Math_Functions_Box.ui
 wget --no-check-certificate -P ~/.FreeCAD/Macro/AeroFoil_UI_Files https://raw.githubusercontent.com/melwyncarlo/AeroFoil/main/AeroFoil_UI_Files/AeroFoil_mfb_img.gif
+wget --no-check-certificate -P ~/.FreeCAD/Macro/AeroFoil_UI_Files https://raw.githubusercontent.com/melwyncarlo/AeroFoil/main/AeroFoil_UI_Files/AeroFoil.png
 
 
 # For the command terminal, copy-paste TO here
