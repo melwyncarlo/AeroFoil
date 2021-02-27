@@ -472,6 +472,7 @@ convey the exclusion of warranty; and each file should have at least the
 
     'AeroFoil' is a FreeCAD macro. AeroFoil creates airfoil curves and faces 
     using pre-defined models, algebraic functions, and DAT or CSV Files.
+    
     Copyright (C) 2021  Melwyn Francis Carlo
 
     This library is free software; you can redistribute it and/or
