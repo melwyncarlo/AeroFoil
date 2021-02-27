@@ -1,5 +1,6 @@
 # ![AeroFoil Logo](https://raw.githubusercontent.com/melwyncarlo/AeroFoil/main/AeroFoil_UI_Files/AeroFoil.png)<br>AeroFoil - a FreeCAD Macro
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License: AGPL v3](https://img.shields.io/github/license/melwyncarlo/AeroFoil)](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE)
 
 ----
