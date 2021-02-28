@@ -8,8 +8,9 @@ before_script:
 install:
   - pip install codecov
   - pip install coverage
+  - pip install pytest
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
-  - coverage combine
+  - py.test AeroFoil.FCMacro --cov=codecov
   - codecov
