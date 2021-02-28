@@ -5,8 +5,9 @@ before_script:
   - sudo apt update
   - sudo apt-get install -y freecad
   - sudo apt-get install -y qt5-default
+install:
+  pip install codecov
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
-  - pip install coverage
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov
