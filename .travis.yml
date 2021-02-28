@@ -13,5 +13,5 @@ script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
   - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-  - python -m pytest --cov=./
+  - python -m pytest --cov=codecov
   - codecov
