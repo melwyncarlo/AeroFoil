@@ -7,11 +7,12 @@ before_script:
   - sudo apt-get install -y qt5-default
 install:
   - pip install codecov
-  - pip install coverage
+  - python -m pip install coverage
   - pip install pytest
+  - pip install pytest-cov
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
   - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-  - python -m pytest --cov=codecov
+  - python -m pytest --cov
   - bash <(curl -s https://codecov.io/bash)
