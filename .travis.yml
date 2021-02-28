@@ -5,4 +5,4 @@ before_script:
   - sudo apt-get install -y freecad
   - sudo apt-get install -y qt5-default
 script:
-  - python AeroFoil.FCMacro
+  - freecad AeroFoil.FCMacro
