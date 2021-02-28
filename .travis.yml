@@ -8,4 +8,5 @@ before_script:
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
+  - pip install coverage
   - bash <(curl -s https://codecov.io/bash)
