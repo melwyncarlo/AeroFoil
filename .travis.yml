@@ -6,8 +6,10 @@ before_script:
   - sudo apt-get install -y freecad
   - sudo apt-get install -y qt5-default
 install:
-  pip install codecov
+  - pip install codecov
+  - pip install coverage
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
+  - coverage combine
   - codecov
