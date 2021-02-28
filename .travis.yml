@@ -1,3 +1,4 @@
+codecov: true
 language: python
 before_script:
   - sudo add-apt-repository -y ppa:freecad-maintainers/freecad-stable
