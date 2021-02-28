@@ -3,6 +3,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License: AGPL v3](https://img.shields.io/github/license/melwyncarlo/AeroFoil)](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/melwyncarlo/AeroFoil)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/melwyncarlo/AeroFoil)
 [![Build Status](https://travis-ci.com/melwyncarlo/AeroFoil.svg?branch=main)](https://travis-ci.com/melwyncarlo/AeroFoil)
 ![Codecov](https://img.shields.io/codecov/c/github/melwyncarlo/AeroFoil)
@@ -13,7 +14,10 @@
 AeroFoil creates airfoil curves and faces using pre-defined models, algebraic functions, 
 as well as imported DAT or CSV files.
 
-### Key Features
+----
+
+
+### <br>Key Features
 * Airfoil points refinement
 * Multiple airfoil copy generation
 * 2D curves and planar face output
@@ -24,7 +28,7 @@ as well as imported DAT or CSV files.
 * DAT text file and CSV spreadsheet data parser
 * Chord length input in mm, cm, m, in., ft, and yards
 
-### Installation
+### <br>Installation
 In Linux, AeroFoil can be installed manually, similar to Windows installation, or by using the command terminal and its relevant commands as mentioned in the [INSTALL](https://github.com/melwyncarlo/AeroFoil/blob/main/INSTALL.sh) file.
 
 By default, the Linux command terminal can be launched by pressing the following keyboard keys simultaneously :
@@ -41,7 +45,7 @@ By default, the FreeCAD User Macro directory should be located at :
 ~/.FreeCAD/Macro
 ```
 
-### Usage
+### <br>Usage
 AeroFoil can be loaded by performing the following steps :-
 1. Launch the `FreeCAD` application.
 2. Click on the `Macro` menu from the Menu Bar.
@@ -60,5 +64,5 @@ Once, the AeroFoil macro has been loaded, follow the instructions in the respect
 
 For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Page](http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil).
 
-### License
+### <br>License
 AeroFoil is made available under the [GNU Lesser General Public License Version 2.1](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE).
