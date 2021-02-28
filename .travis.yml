@@ -7,4 +7,4 @@ before_script:
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
-  - codecov
+  - pip install --user codecov && codecov -t 78eded96-433e-4692-ac40-2fbf9a460242
