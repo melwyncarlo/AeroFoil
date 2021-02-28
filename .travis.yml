@@ -12,5 +12,5 @@ install:
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
-  - pytest --cov=./
+  - pytest AeroFoil.FCMacro --cov=./
   - codecov
