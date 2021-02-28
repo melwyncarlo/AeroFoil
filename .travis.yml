@@ -1,6 +1,8 @@
 language: python
-install:
-  - pip install -r requirements.txt
-  - pip install .
+before_script:
+  - sudo add-apt-repository ppa:freecad-maintainers/freecad-stable
+  - sudo apt update
+  - sudo apt install freecad
+  - sudo apt-get install qt5-default
 script:
   - python AeroFoil.FCMacro
