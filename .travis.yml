@@ -6,3 +6,5 @@ before_script:
   - sudo apt-get install -y qt5-default
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
+after_success:
+  - codecov
