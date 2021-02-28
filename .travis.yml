@@ -8,6 +8,4 @@ before_script:
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
-  - pip install --user codecov && codecov -t 78eded96-433e-4692-ac40-2fbf9a460242
-  - export CODECOV_TOKEN="78eded96-433e-4692-ac40-2fbf9a460242"
-  - bash <(curl -s https://codecov.io/bash) -v
+  - bash <(curl -s https://codecov.io/bash)
