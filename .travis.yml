@@ -8,12 +8,10 @@ before_script:
 install:
   - pip install codecov
   - pip install coverage
-  - pip install pytest-cov
   - pip install pytest
 script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
   - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-  - ls /home/travis/build/melwyncarlo/AeroFoil
-  - pytest AeroFoil.FCMacro
+  - python -m pytest --cov=./
   - codecov
