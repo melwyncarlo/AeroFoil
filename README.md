@@ -10,7 +10,7 @@
 
 ----
 
-'AeroFoil' is a user-created macro to be used within the [FreeCAD](https://www.freecadweb.org/) application.
+**'AeroFoil'** is a user-created macro to be used within the [FreeCAD](https://www.freecadweb.org/) application.
 AeroFoil creates airfoil curves and faces using pre-defined models, algebraic functions, 
 as well as imported DAT or CSV files.
 
