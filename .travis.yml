@@ -13,5 +13,5 @@ script:
   - if freecad AeroFoil.FCMacro & then echo "True"; kill $!; else echo "False"; fi
 after_success:
   - ls /home/travis/build/melwyncarlo/AeroFoil
-  - pytest AeroFoil.FCMacro --cov=codecov
+  - py.test AeroFoil.FCMacro --cov=codecov
   - codecov
