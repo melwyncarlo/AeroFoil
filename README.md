@@ -3,10 +3,12 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License: AGPL v3](https://img.shields.io/github/license/melwyncarlo/AeroFoil)](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/melwyncarlo/AeroFoil)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/melwyncarlo/AeroFoil)
-[![Build Status](https://travis-ci.com/melwyncarlo/AeroFoil.svg?branch=main)](https://travis-ci.com/melwyncarlo/AeroFoil)
-![Codecov](https://img.shields.io/codecov/c/github/melwyncarlo/AeroFoil)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
+<br> ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/melwyncarlo/AeroFoil) 
+[![Build Status](https://travis-ci.com/melwyncarlo/AeroFoil.svg?branch=main)](https://travis-ci.com/melwyncarlo/AeroFoil) 
+![Codecov](https://img.shields.io/codecov/c/github/melwyncarlo/AeroFoil) 
+<br> [![Total alerts](https://img.shields.io/lgtm/alerts/g/melwyncarlo/AeroFoil.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/melwyncarlo/AeroFoil/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/melwyncarlo/AeroFoil.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/melwyncarlo/AeroFoil/context:python)
 
 ----
 
