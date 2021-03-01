@@ -70,7 +70,8 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 - [ ] Fix Bugs (for FreeCAD v0.18 and v0.19)
 - [ ] Get the LGTM Alerts to 0, and Code Quality to A
 - [ ] Add Leading Edge Refinement (0c to 0.25c)
-- [ ] Add AeroFoil icon to object in Tree View
+- [ ] Add the AeroFoil icon to the dialog boxes
+- [ ] Add the AeroFoil icon to objects in Tree View
 - [ ] Convert from Part :: Feature object to App :: FeaturePython object
 - [ ] Attempt, if possible, a complete CodeCov Coverage
 - [ ] Add the AeroFoil icon to dialog boxes  [ Not Important ]
