@@ -1,0 +1,7 @@
+queries:
+  - include: Macro_AeroFoil_UNFORMATTED
+  
+extraction:
+  python:
+    python_setup:
+      version: 3
