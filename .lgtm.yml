@@ -1,5 +1,6 @@
-queries:
-  - include: Macro_AeroFoil_UNFORMATTED
+path_classifiers:
+  test:
+    - Macro_AeroFoil_UNFORMATTED
   
 extraction:
   python:
