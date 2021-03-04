@@ -743,6 +743,7 @@ class AeroFoilDialog:
             self.dialog = FreeCADGui.PySideUic.loadUi(MD_ + "Math_Functions_Box.ui")
             self.d_(8, "af_mfb_label_6").setText("<img src=" + MD_ + "mfb_img.gif>")
             self.d_(1, "af_mfb_okay_button").clicked.connect(lambda: self.okay_())
+        self.dialog.setWindowIcon(QtGui.QIcon(App.getUserMacroDir(True) + "/AeroFoil_UI_Files/AeroFoil.png"))
         self.dialog.exec_()
 
 # Button Functions
