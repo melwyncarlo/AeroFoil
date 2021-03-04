@@ -107,8 +107,8 @@ AeroFoil_UI_Files/AeroFoil_Math_Functions_Box.ui, AeroFoil_UI_Files/AeroFoil_mfb
 # Library Imports
 # ------------------------------------------------------------------------------------------------
 
-import FreeCAD, FreeCADGui, Part, Draft
-from FreeCAD import Base
+import FreeCAD as App
+import FreeCADGui, Part, Draft
 from PySide2.QtWidgets import (
     QPushButton,
     QLineEdit,
@@ -183,7 +183,7 @@ FUNCTIONSARRAY = [
 ]
 UNITSCONVERSION = [0, 1, 10, 1000, 25.4, 304.8, 914.4]
 MIN_CHORD_LENGTH_MM = 1
-MD_ = App.getUserMacroDir() + "AeroFoil_UI_Files/AeroFoil_"
+MD_ = App.getUserMacroDir(True) + "/AeroFoil_UI_Files/AeroFoil_"
 
 
 
@@ -222,12 +222,12 @@ class AeroFoil:
         if quantity_ != 1:
             refNum = int(re.findall(r"\d+", self.profileName)[0])
             FreeCADGui.Selection.clearSelection()
-            Gui.Selection.addSelection(
+            FreeCADGui.Selection.addSelection(
                 App.ActiveDocument.getObjectsByLabel(self.profileName)[0]
             )
-            Gui.runCommand("Std_Copy")
+            FreeCADGui.runCommand("Std_Copy")
             for i in range(quantity_ - 1):
-                Gui.runCommand("Std_Paste")
+                FreeCADGui.runCommand("Std_Paste")
                 App.ActiveDocument.getObjectsByLabel(
                     "AeroFoil_" + str(refNum + i + 1).zfill(3)
                 )[0].Label = "AeroFoil_" + str(refNum + i + 1)
@@ -267,7 +267,7 @@ class AeroFoil:
                 tempStr = "BSpline"
             objRef.DesignCurveType = tempStr
             objRef.NumberOfPoints = self.n_units - 1
-        except:
+        except Exception:
             print(
                 "\nCannot generate AeroFoil properties in FreeCAD version &#60;0.19 !\n"
             )
@@ -492,17 +492,17 @@ class AeroFoil:
                 shape_ = App.ActiveDocument.addObject("Part::Feature", self.profileName)
                 shape_.Shape = DWireOrBSpline_.Shape
                 App.ActiveDocument.removeObject(DWireOrBSpline_.Label)
-        except:
+        except Exception:
             # Unexpected Error Occurred while Processing
             try:
                 App.ActiveDocument.removeObject(self.profileName)
-            except:
+            except Exception:
                 pass
             App.activeDocument().recompute()
             return False
         App.activeDocument().recompute()
-        Gui.activeDocument().activeView().viewFront()
-        Gui.SendMsgToActiveView("ViewFit")
+        FreeCADGui.activeDocument().activeView().viewFront()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
         return True
 
 
@@ -743,7 +743,7 @@ class AeroFoilDialog:
             self.dialog = FreeCADGui.PySideUic.loadUi(MD_ + "Math_Functions_Box.ui")
             self.d_(8, "af_mfb_label_6").setText("<img src=" + MD_ + "mfb_img.gif>")
             self.d_(1, "af_mfb_okay_button").clicked.connect(lambda: self.okay_())
-        self.dialog.exec()
+        self.dialog.exec_()
 
 # Button Functions
 # ----------------------------------------------------------------
@@ -775,8 +775,8 @@ class AeroFoilDialog:
                 (
                     self.loadedFilePath,
                     self.loadSuccess,
-                    loadedFile,
-                    loadedFileContents,
+                    self.loadedFile,
+                    self.loadedFileContents,
                 ) = ([""], False, "", [])
             elif dialogIndex[0] == 9:
                 (
@@ -1099,8 +1099,6 @@ def setAlertBox(message, error):
 
 
 
-
-
 # Operating and Math Functions
 # ------------------------------------------------------------------------------------------
 
@@ -1137,7 +1135,7 @@ def prepareAeroFoil(objRef):
                     yl_.append(
                         solveFx(objRef.bottomCurveFunction, xu_[-1]) * chordLength_conv
                     )
-            except:
+            except Exception:
                 # Unexpected Error Occurred while Processing
                 return False
             if objRef.progressBar_.value() < 50:
@@ -1218,6 +1216,7 @@ def prepareAeroFoil(objRef):
 
 def interpolateNum(x1_, y1_, x2_, y2_, x_):
     return y1_ + (((x_ - x1_) * (y2_ - y1_)) / (x2_ - x1_))
+
 
 
 def generateName(inputName):
@@ -1415,7 +1414,7 @@ def solveFx(f_, x_):
     f_ = f_.replace("atan(", "convTrig(6,")
     try:
         return eval(f_)
-    except:
+    except Exception:
         return
 
 
@@ -1492,7 +1491,8 @@ def validateFunction(objRef, mode):
         ".)",
         ").",
         ".(",
-        "(." "++",
+        "(.",
+        "++",
         "--",
         "**",
         "//",
@@ -1560,7 +1560,7 @@ def validateFunction(objRef, mode):
                                         "Top and Bottom curve function 'ranges' should not intersect!",
                                         True,
                                     )
-                        except:
+                        except Exception:
                             setAlertBox(
                                 modeName[i]
                                 + " curve function contains unrecognizable,\ninvalid components !",
@@ -1632,7 +1632,7 @@ def validateFile(objRef):
                 objRef.loadedFileContents.append(lineOrRow)
             else:
                 if i_start != 0:
-                    i_end = count - 1 if i_start != 0 else i_end
+                    i_end = count - 1
                     break
             if i_start != 0:
                 if tempStr == "":
@@ -1660,22 +1660,6 @@ def validateFile(objRef):
         elif i_end == 0:
             i_end = count - 1
             # return True
-        else:
-            # if i_end - i_start + 1 >= MIN_DATA_POINTS:
-            # return True
-            if i_end - i_start + 1 < MIN_DATA_POINTS:
-                setAlertBox(
-                    "There must be a minimum of "
-                    + str(MIN_DATA_POINTS)
-                    + " selected file rows,\nthat is, pairs of data points !",
-                    True,
-                )
-                return False
-        objRef.lineStart, objRef.row1, objRef.lineEnd, objRef.row2 = (
-            (i_start, i_start, i_end, i_end)
-            if objRef.importFrom == 1
-            else (objRef.lineStart, objRef.row1, objRef.lineEnd, objRef.row2)
-        )
     else:
         for lineOrRow in fileReader_:
             if count >= i_start:
@@ -1725,10 +1709,23 @@ def validateFile(objRef):
                         tempStr = "0"
                 x_prev = float(pointsInLine[0])
             count += 1
+    # if i_end - i_start + 1 >= MIN_DATA_POINTS:
+    # return True
+    if i_end - i_start + 1 < MIN_DATA_POINTS:
+        setAlertBox(
+            "There must be a minimum of "
+            + str(MIN_DATA_POINTS)
+            + " selected file rows,\nthat is, pairs of data points !",
+            True,
+        )
+        return False
+    objRef.lineStart, objRef.row1, objRef.lineEnd, objRef.row2 = (
+        (i_start, i_start, i_end, i_end)
+        if objRef.importFrom == 1
+        else (objRef.lineStart, objRef.row1, objRef.lineEnd, objRef.row2)
+    )
     objRef.loadedFile.close()
     return True
-
-
 
 
 
