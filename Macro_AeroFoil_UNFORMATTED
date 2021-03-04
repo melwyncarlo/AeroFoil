@@ -85,7 +85,7 @@
 
 
 
-__Title__="AeroFoil"
+__Title__ = "AeroFoil"
 __Author__ = "Melwyncarlo"
 __Version__ = "1.0.0"
 __Date__    = "2021-02-26"
