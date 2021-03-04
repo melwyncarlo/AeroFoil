@@ -7,8 +7,3 @@ path_classifiers:
     - INSTALL.sh
     - LICENSE
     - README.md
-  
-extraction:
-  python:
-    python_setup:
-      version: 3
