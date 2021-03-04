@@ -1,7 +1,12 @@
 path_classifiers:
   test:
-    - AeroFoil.FCMacro
-    - Macro_AeroFoil_UNFORMATTED
+    - exclude: /
+    - AeroFoil_UI_Files
+    - .travis.yml
+    - AeroFoil.zip
+    - INSTALL.sh
+    - LICENSE
+    - README.md
   
 extraction:
   python:
