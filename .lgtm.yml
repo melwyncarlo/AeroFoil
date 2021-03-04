@@ -1,5 +1,6 @@
 path_classifiers:
   test:
+    - AeroFoil.FCMacro
     - Macro_AeroFoil_UNFORMATTED
   
 extraction:
