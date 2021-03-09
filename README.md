@@ -24,7 +24,9 @@ as well as imported DAT or CSV files.
 * Multiple airfoil copy generation
 * 2D curves and planar face output
 * DWire/PolyLine and BSpline output
-* Sketch workbench and Draft workbench output
+* Sketcher workbench and Draft workbench output
+* Fully constrained sketches in Sketcher workbench
+* Split (upper and lower) airfoil curves generation
 * Ready-made NACA 4-digit and 5-digit solvers
 * Symmetric and asymmetric curve functions parser
 * DAT text file and CSV spreadsheet data parser
@@ -67,13 +69,15 @@ Once, the AeroFoil macro has been loaded, follow the instructions in the respect
 For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Page](http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil).
 
 ### <br>Future works
-- [ ] Fix Bugs (for FreeCAD v0.18 and v0.19)
+- [X] Fix Bugs (for FreeCAD v0.18 and v0.19)
 - [X] Get the LGTM Alerts to 0, and Code Quality to A
 - [ ] Add Leading Edge Refinement (0c to 0.25c)
 - [X] Add the AeroFoil icon to the dialog boxes
 - [ ] Add the AeroFoil icon to objects in Tree View
 - [ ] Convert from Part :: Feature object to App :: FeaturePython object
 - [ ] Attempt, if possible, a complete CodeCov Coverage
+- [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
+- [ ] Create a Python Console Run Command
 
 ### <br>License
 AeroFoil is made available under the [GNU Lesser General Public License Version 2.1](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE).
