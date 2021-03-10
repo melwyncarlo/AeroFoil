@@ -82,5 +82,9 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 - [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
 - [ ] Create a Python Console Run Command
 
+### <br>Links
+[1] [Airfoil Tools](http://airfoiltools.com/) contains about 1,638 different airfoils.<br>
+[2] [UIUC Airfoil Coordinates Database](https://m-selig.ae.illinois.edu/ads/coord_database.html) contains nearly 1,600 different airfoils.
+
 ### <br>License
 AeroFoil is made available under the [GNU Lesser General Public License Version 2.1](https://github.com/melwyncarlo/AeroFoil/blob/main/LICENSE).
