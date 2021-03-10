@@ -33,6 +33,9 @@ as well as imported DAT or CSV files.
 * Chord length input in mm, cm, m, in., ft, and yards
 
 ### <br>Installation
+In the [FreeCAD](https://www.freecadweb.org/) software, AeroFoil can be downloaded directly using the in-built [Addon Manager](https://wiki.freecadweb.org/Std_AddonMgr).
+<br>AeroFoil can also be obtained from the [FreeCAD Macros Github Repository].
+
 In Linux, AeroFoil can be installed manually, similar to Windows installation, or by using the command terminal and its relevant commands as mentioned in the [INSTALL](https://github.com/melwyncarlo/AeroFoil/blob/main/INSTALL.sh) file.
 
 By default, the Linux command terminal can be launched by pressing the following keyboard keys simultaneously :
@@ -66,7 +69,7 @@ Once, the AeroFoil macro has been loaded, follow the instructions in the respect
 | **(1)**  | Performing the macro operation with custom points and refinement produces no visible changes.  |
 | **(2)**  | The AeroFoil object properties are only visible on the FreeCAD software version 0.19. On older versions, you will be shown a warning on the console. This warning will not affect the output.  |
 
-For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Page](http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil).
+For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Page](http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil) or its discussion page on the [FreeCAD Forum](https://forum.freecadweb.org/viewtopic.php?f=22&t=56162).
 
 ### <br>Future works
 - [X] Fix Bugs (for FreeCAD v0.18 and v0.19)
