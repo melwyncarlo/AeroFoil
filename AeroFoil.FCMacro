@@ -464,7 +464,7 @@ class AeroFoil:
                             if i_count == 0
                             else (self.midIndices[1], len(self.points[0]) - 1)
                         )
-                        tempXif, tempXm = self._create_tempX_var(startIndex, endIndex)
+                        tempXif, tempXm, startIndex, endIndex = self._create_tempX_var(startIndex, endIndex)
                         draftOutputName = (
                             self.profileName + "_Upper"
                             if i_count == 0
@@ -565,13 +565,42 @@ class AeroFoil:
         startIndex: (Integer) Zero-based index of the data points list to begin from.
         endIndex:   (Integer) Zero-based index of the data points list to end to.
         """
+        posVar, negVar, startIndex_new, endIndex_new = 0, 0, startIndex, endIndex
+        for i1 in range(startIndex, startIndex + int(0.1 * (endIndex - startIndex))):
+            if self.points[1][i1] >= 0:
+                posVar += 1
+            else:
+                negVar += 1
+        for j1 in range(startIndex, startIndex + int(0.1 * (endIndex - startIndex))):
+            if posVar >= negVar:
+                if self.points[1][j1] >= 0:
+                    startIndex_new = j1
+                    break
+            else:
+                if self.points[1][j1] < 0:
+                    startIndex_new = j1
+                    break
+        for i2 in range(endIndex, endIndex - int(0.1 * (endIndex - startIndex)), -1):
+            if self.points[1][i2] >= 0:
+                posVar += 1
+            else:
+                negVar += 1
+        for j2 in range(endIndex, endIndex - int(0.1 * (endIndex - startIndex)), -1):
+            if posVar >= negVar:
+                if self.points[1][j2] >= 0:
+                    endIndex_new = j2
+                    break
+            else:
+                if self.points[1][j2] < 0:
+                    endIndex_new = j2
+                    break
         if self.defaultEndPoints:
-            tempXif = round(self.points[0][startIndex], 2)
-            tempXm = round(self.points[0][endIndex], 2)
-            self.points[0][startIndex] = round(self.points[0][startIndex], 2)
-            self.points[0][endIndex] = round(self.points[0][endIndex], 2)
+            tempXif = round(self.points[0][startIndex_new], 2)
+            tempXm = round(self.points[0][endIndex_new], 2)
+            self.points[0][startIndex_new] = round(self.points[0][startIndex_new], 2)
+            self.points[0][endIndex_new] = round(self.points[0][endIndex_new], 2)
         else:
-            if startIndex == 0:
+            if startIndex_new == 0:
                 xi_, yi_ = self.points[0][0], self.points[1][0]
                 xf_, yf_ = (
                     (self.points[0][-1], self.points[1][-1])
@@ -581,24 +610,24 @@ class AeroFoil:
                     )
                     else (self.points[0][-2], self.points[1][-2])
                 )
-                x1m_, y1m_ = self.points[0][endIndex], self.points[1][endIndex]
+                x1m_, y1m_ = self.points[0][endIndex_new], self.points[1][endIndex_new]
                 x2m_, y2m_ = (
-                    (self.points[0][endIndex + 1], self.points[1][endIndex + 1])
-                    if self.points[0][endIndex] != self.points[0][endIndex + 1]
-                    or self.points[1][endIndex] != self.points[1][endIndex + 1]
-                    else (self.points[0][endIndex + 2], self.points[1][endIndex + 2])
+                    (self.points[0][endIndex_new + 1], self.points[1][endIndex_new + 1])
+                    if self.points[0][endIndex_new] != self.points[0][endIndex_new + 1]
+                    or self.points[1][endIndex_new] != self.points[1][endIndex_new + 1]
+                    else (self.points[0][endIndex_new + 2], self.points[1][endIndex_new + 2])
                 )
             else:
-                xi_, yi_ = self.points[0][startIndex], self.points[1][startIndex]
+                xi_, yi_ = self.points[0][startIndex_new], self.points[1][startIndex_new]
                 xf_, yf_ = (
-                    (self.points[0][startIndex - 1], self.points[1][startIndex - 1])
+                    (self.points[0][startIndex_new - 1], self.points[1][startIndex_new - 1])
                     if (
-                        self.points[0][startIndex] != self.points[0][startIndex - 1]
-                        or self.points[1][startIndex] != self.points[1][startIndex - 1]
+                        self.points[0][startIndex_new] != self.points[0][startIndex_new - 1]
+                        or self.points[1][startIndex_new] != self.points[1][startIndex_new - 1]
                     )
                     else (
-                        self.points[0][startIndex - 2],
-                        self.points[1][startIndex - 2],
+                        self.points[0][startIndex_new - 2],
+                        self.points[1][startIndex_new - 2],
                     )
                 )
                 x1m_, y1m_ = self.points[0][-1], self.points[1][-1]
@@ -610,7 +639,7 @@ class AeroFoil:
                 )
             tempXif = interpolateNum(yi_, xi_, yf_, xf_, 0)
             tempXm = interpolateNum(y1m_, x1m_, y2m_, x2m_, 0)
-        return tempXif, tempXm
+        return tempXif, tempXm, startIndex_new, endIndex_new
 
     def _createSketcherPolyLine(self, sketchName, startIndex, endIndex):
         """
@@ -633,7 +662,7 @@ class AeroFoil:
         count, tempBool = 0, False
         tempXif, tempXm = 0, 0
         if self.designsplit:
-            tempXif, tempXm = self._create_tempX_var(startIndex, endIndex)
+            tempXif, tempXm, startIndex, endIndex = self._create_tempX_var(startIndex, endIndex)
             if (
                 tempXif == self.points[0][startIndex]
                 and self.points[1][startIndex] == 0
@@ -846,7 +875,7 @@ class AeroFoil:
         isXif, isXm = False, False
         tempXif, tempXm = 0, 0
         if self.designsplit:
-            tempXif, tempXm = self._create_tempX_var(startIndex, endIndex)
+            tempXif, tempXm, startIndex, endIndex = self._create_tempX_var(startIndex, endIndex)
         if self.designsplit and (
             tempXif != self.points[0][startIndex] or self.points[1][startIndex] != 0
         ):
