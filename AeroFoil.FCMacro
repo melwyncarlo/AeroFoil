@@ -105,19 +105,19 @@
 
 
 
-__Title__ = "AeroFoil"
-__Author__ = "Melwyncarlo"
-__Version__ = "2.0.0"
-__Date__ = "2021-03-09"
-__Comment__ = "AeroFoil creates airfoil curves and faces using pre-defined models, algebraic functions, and DAT or CSV Files"
-__Web__ = "https://github.com/melwyncarlo/AeroFoil"
-__Wiki__ = "http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil"
-__Icon__ = "AeroFoil_UI_Files/AeroFoil.png"
-__Help__ = "Click on the AeroFoil button/macro, and follow the instructions in the subsequent dialog boxes."
-__Status__ = "stable"
-__Requires__ = "Freecad >= v0.17"
+__Title__         = "AeroFoil"
+__Author__        = "Melwyncarlo"
+__Version__       = "2.0.0"
+__Date__          = "2021-03-09"
+__Comment__       = "AeroFoil creates airfoil curves and faces using pre-defined models, algebraic functions, and DAT or CSV Files"
+__Web__           = "https://github.com/melwyncarlo/AeroFoil"
+__Wiki__          = "http://www.freecadweb.org/wiki/index.php?title=Macro_AeroFoil"
+__Icon__          = "AeroFoil_UI_Files/AeroFoil.png"
+__Help__          = "Click on the AeroFoil button/macro, and follow the instructions in the subsequent dialog boxes."
+__Status__        = "stable"
+__Requires__      = "Freecad >= v0.17"
 __Communication__ = "https://github.com/melwyncarlo/AeroFoil/issues"
-__Files__ = "AeroFoil_UI_Files/AeroFoil_Initial_Dialog.ui, AeroFoil_UI_Files/AeroFoil_NACA4Digit_Dialog.ui, \
+__Files__         = "AeroFoil_UI_Files/AeroFoil_Initial_Dialog.ui, AeroFoil_UI_Files/AeroFoil_NACA4Digit_Dialog.ui, \
 AeroFoil_UI_Files/AeroFoil_NACA5Digit_Dialog.ui, AeroFoil_UI_Files/AeroFoil_CurvesInput_Dialog.ui, \
 AeroFoil_UI_Files/AeroFoil_PointsInput_Dialog.ui, AeroFoil_UI_Files/AeroFoil_DATInput_Dialog.ui, \
 AeroFoil_UI_Files/AeroFoil_CSVInput_Dialog.ui, AeroFoil_UI_Files/AeroFoil_FileLoad_Dialog.ui, \
@@ -416,7 +416,6 @@ class AeroFoil:
         This function utilizes the 'try ... except' method to avoid any complications 
         on the user's end. A simple error message is displayed instead.
         """
-        constraintIndex = 0
         # Generating Polygons and BSplines
         try:
             if self.designtype[0] == 2:
@@ -572,8 +571,6 @@ class AeroFoil:
             self.points[0][startIndex] = round(self.points[0][startIndex], 2)
             self.points[0][endIndex] = round(self.points[0][endIndex], 2)
         else:
-            xi_, yi_, xf_, yf_ = 0, 0, 0, 0
-            x1m_, y1m_, x2m_, y2m_ = 0, 0, 0, 0
             if startIndex == 0:
                 xi_, yi_ = self.points[0][0], self.points[1][0]
                 xf_, yf_ = (
@@ -1081,7 +1078,6 @@ class AeroFoil:
                 constraintIndex,
                 app.Units.Quantity(str(self.points[1][endIndex]) + "mm"),
             )
-            startFrom = startIndex + 1
             count += 1
         if isXm:
             constraintIndex = sketchObj.addConstraint(
@@ -1964,7 +1960,6 @@ def _prepareAeroFoil(objRef):
     ----------
     objRef: An instance of the 'AeroFoilDialog' object.
     """
-    tempList1, tempList2 = [], []
     global UNITSCONVERSION
     global NACA_NUMBER_OF_POINTS
     chordLength_conv = objRef.chordLength * UNITSCONVERSION[objRef.chordUnits]
@@ -2007,18 +2002,11 @@ def _prepareAeroFoil(objRef):
         objRef.midIndex1, objRef.midIndex2 = len(xu_) - 1, len(xu_)
         objRef.pointsX, objRef.pointsY = xu_ + xl_, yu_ + yl_
     elif objRef.airfoilType == 4:
-        i_start, i_end, count, tempVar, pointsInLine, pointsInLine_prev = (
-            0,
-            0,
+        count, tempVar, pointsInLine, pointsInLine_prev = (
             1,
             "",
             [],
             [],
-        )
-        i_start, i_end = (
-            (objRef.lineStart, objRef.lineEnd)
-            if objRef.importFrom == 1
-            else (objRef.row1, objRef.row2)
         )
         n_ = len(objRef.loadedFileContents)
         for lineOrRow in objRef.loadedFileContents:
@@ -2634,9 +2622,6 @@ def _validateFile(objRef):
                 "File is invalid, or file is of incorrect format !\n" + tempStr, True
             )
             return False
-        elif i_end == 0:
-            i_end = count - 1
-            # return True
     else:
         for lineOrRow in fileReader_:
             if count >= i_start:
@@ -2724,12 +2709,12 @@ def _validateFile(objRef):
 ###----------------------------------------------------------------###
 ### 		AEROFOIL MACRO CALLS - Bottom (check Top)	   ###
 ###----------------------------------------------------------------###
-								   ###
-    """
-    This is the main macro call. The code below commences 
-    the AeroFoil GUI interface. This script cannot be 
-    called externally.
-    """								   ###
+###								   ###
+###								   ###
+###	This is the main macro call. The code below commences 	   ###
+###	the AeroFoil GUI interface. This script cannot be 	   ###
+###	called externally.					   ###
+    								   ###
 								   ###
 if __name__ == "__main__":					   ###
     AeroFoilDialog()						   ###
