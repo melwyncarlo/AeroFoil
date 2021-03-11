@@ -74,8 +74,8 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 ### <br>Future works
 - [X] Fix Bugs (for FreeCAD v0.18 and v0.19)
 - [X] Get the LGTM Alerts to 0, and Code Quality to A
-- [ ] Add the airfoil preview feature
 - [ ] Implement automatic parsing of files
+- [ ] Add the 'search airfoil database' feature
 - [ ] Add leading edge refinement (0c to 0.25c)
 - [X] Add the AeroFoil icon to the dialog boxes
 - [ ] Add the AeroFoil icon to objects in Tree View
