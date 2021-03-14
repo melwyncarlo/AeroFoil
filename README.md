@@ -33,7 +33,8 @@ as well as imported DAT or CSV files.
 * Chord length input in mm, cm, m, in., ft, and yards
 
 ### <br>Installation
-In the [FreeCAD](https://www.freecadweb.org/) software, AeroFoil can be downloaded directly using the in-built [Addon Manager](https://wiki.freecadweb.org/Std_AddonMgr).
+In the [FreeCAD](https://www.freecadweb.org/) software, AeroFoil can be downloaded directly using the in-built [Addon Manager](https://wiki.freecadweb.org/Std_AddonMgr). You may need to download [GitPython](https://pypi.org/project/GitPython/) (read the relevant [documentation](https://gitpython.readthedocs.io/en/stable/intro.html)) to automatically download the associated folder (and its accompanying files); 
+<br>else, resort to manual download and extraction of the [AeroFoil.zip](https://github.com/melwyncarlo/AeroFoil/blob/main/AeroFoil.zip) file.
 <br>AeroFoil can also be obtained from the [FreeCAD Macros Github Repository](https://github.com/FreeCAD/FreeCAD-macros/tree/master/ObjectCreation).
 
 In Linux, AeroFoil can be installed manually, similar to Windows installation, or by using the command terminal and its relevant commands as mentioned in the [INSTALL](https://github.com/melwyncarlo/AeroFoil/blob/main/INSTALL.sh) file.
@@ -73,14 +74,14 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 
 ### <br>Future works
 - [X] Fix Bugs (for FreeCAD v0.18 and v0.19)
-- [X] Get the LGTM Alerts to 0, and Code Quality to A
+- [ ] Attempt, if possible, a complete CodeCov Coverage
+- [ ] Get the LGTM Alerts to 0, and Code Quality to A (preferably, to A+)
 - [ ] Implement automatic parsing of files
 - [ ] Add the 'search airfoil database' feature
-- [ ] Add leading edge refinement (0c to 0.25c)
+- [ ] ~~Add leading edge refinement (0c to 0.25c)~~
 - [X] Add the AeroFoil icon to the dialog boxes
 - [ ] Add the AeroFoil icon to objects in Tree View
 - [ ] Convert from Part :: Feature object to App :: FeaturePython object
-- [ ] Attempt, if possible, a complete CodeCov Coverage
 - [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
 - [ ] Create a Python Console Run Command
 
