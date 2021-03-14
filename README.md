@@ -34,7 +34,7 @@ as well as imported DAT or CSV files.
 
 ### <br>Installation
 In the [FreeCAD](https://www.freecadweb.org/) software, AeroFoil can be downloaded directly using the in-built [Addon Manager](https://wiki.freecadweb.org/Std_AddonMgr). You may need to download [GitPython](https://pypi.org/project/GitPython/) (read the relevant [documentation](https://gitpython.readthedocs.io/en/stable/intro.html)) to automatically download the associated folder (and its accompanying files); else, resort to manual download and extraction of the [AeroFoil.zip](https://github.com/melwyncarlo/AeroFoil/blob/main/AeroFoil.zip) file.
-<br>AeroFoil can also be obtained from the [FreeCAD Macros Github Repository](https://github.com/FreeCAD/FreeCAD-macros/tree/master/ObjectCreation).
+<br>AeroFoil can also be obtained directly from the [FreeCAD Macros Github Repository](https://github.com/FreeCAD/FreeCAD-macros/tree/master/ObjectCreation).
 
 In Linux, AeroFoil can be installed manually, similar to Windows installation, or by using the command terminal and its relevant commands as mentioned in the [INSTALL](https://github.com/melwyncarlo/AeroFoil/blob/main/INSTALL.sh) file.
 
