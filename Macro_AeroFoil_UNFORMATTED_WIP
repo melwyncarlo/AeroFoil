@@ -233,6 +233,32 @@ doc = app.activeDocument()
 
 
 
+# AeroFoil View Provider Class
+#------------------------------------------------------------------------------------------------
+
+class ViewProvider:
+
+	"""
+	The 'ViewProvider' class is responsible for implementing the AeroFoil icon 
+	onto some of the created objects in the Tree View.
+	"""
+
+	def __init__(self, obj):
+		"""
+		This function sets the inputted object to the proxy object of 
+		the actual view provider.
+		"""
+		obj.Proxy = self
+		self.icone = app.getUserMacroDir(True) + "/AeroFoil_UI_Files/AeroFoil.svg"
+
+	def getIcon(self):
+		"""
+		This function applies a custom icon to the inputted object.
+		"""
+        	return self.icone
+
+
+
 # Main Function Class
 #------------------------------------------------------------------------------------------------
 
@@ -292,15 +318,12 @@ class AeroFoil:
 		"""
 		if quantity_ != 1:
 			refNum = int (re.findall(r'\d+', self.profileName)[0])
-			gui.Selection.clearSelection()
-			if self.designsplit:
-				gui.Selection.addSelection( doc.getObjectsByLabel(self.profileName + "_Upper")[0] )
-				gui.Selection.addSelection( doc.getObjectsByLabel(self.profileName + "_Lower")[0] )
-			else:
-				gui.Selection.addSelection( doc.getObjectsByLabel(self.profileName)[0] )
-			gui.runCommand("Std_Copy")
 			for i in range (quantity_ - 1):
-				gui.runCommand("Std_Paste")
+				if self.designsplit:
+					doc.copyObject(doc.getObjectsByLabel(self.profileName + "_Upper")[0])
+					doc.copyObject(doc.getObjectsByLabel(self.profileName + "_Lower")[0])
+				else:
+					doc.copyObject(doc.getObjectsByLabel(self.profileName)[0])
 				if self.designsplit:
 					doc.getObjectsByLabel("AeroFoil_" + str(refNum) + "_Upper" + \
 					str(i + 1).zfill(3))[0].Label = "AeroFoil_" + str(refNum + i + 1) + "_Upper"
@@ -442,8 +465,9 @@ class AeroFoil:
 					if self.designsplit and self.designsplitmode == 2:
 						doc.getObject(addList[0].Name).Label = draftOutputName
 					else:
-						shape_ = doc.addObject("Part::Feature", draftOutputName)
+						shape_ = doc.addObject("Part::FeaturePython", draftOutputName)
 						shape_.Shape = DWireOrBSpline_.Shape
+						ViewProvider(shape_.ViewObject)
 						doc.removeObject(DWireOrBSpline_.Label)
 					i_count += 1
 		except Exception:
@@ -503,8 +527,8 @@ class AeroFoil:
 					endIndex_new = j2
 					break
 		if self.defaultEndPoints:
-			tempXif = round(self.points[0][startIndex_new], 2)
-			tempXm  = round(self.points[0][endIndex_new], 2)
+			tempXif = round(self.points[0][startIndex_new])
+			tempXm  = round(self.points[0][endIndex_new])
 			self.points[0][startIndex_new] = round(self.points[0][startIndex_new], 2)
 			self.points[0][endIndex_new]   = round(self.points[0][endIndex_new], 2)
 		else:
@@ -819,7 +843,7 @@ class AeroFoilDialog:
 		# Variables Pertaining to AeroFoil_PointsInput_Dialog
 		self.importFrom, self.mirroring = 1, False
 		# Variables Pertaining to AeroFoil_DATInput_Dialog
-		self.lineStart, self.lineEnd, self.decimalType = 0, 0, 1
+		self.lineStart, self.lineEnd = 0, 0
 		# Variables Pertaining to AeroFoil_CSVInput_Dialog
 		self.col1, self.col2, self.row1, self.row2 = 1, 2, 0, 0
 		# Variables Pertaining to AeroFoil_FileLoad_Dialog
@@ -900,10 +924,6 @@ class AeroFoilDialog:
 			self.dialog = gui.PySideUic.loadUi(MACRO_DIR + "DATInput_Dialog.ui")
 			self._d(6, 'af_d2d1a_spinBox_1').setValue(self.tempStart)
 			self._d(6, 'af_d2d1a_spinBox_2').setValue(self.tempEnd)
-			if self.decimalType == 1:
-				self._d(4, 'af_d2d1a_radio_1').setChecked(True)
-			else:
-				self._d(4, 'af_d2d1a_radio_2').setChecked(True)
 			self._d(1, 'af_d2d1a_next_button').clicked.connect(lambda: self._next(1))
 			self._d(1, 'af_d2d1a_back_button').clicked.connect(lambda: self._next(-1))
 		elif dialogIndex[0] == 7:
@@ -912,10 +932,6 @@ class AeroFoilDialog:
 			self._d(6, 'af_d2d1b_spinBox_2').setValue(self.col2)
 			self._d(6, 'af_d2d1b_spinBox_3').setValue(self.tempStart)
 			self._d(6, 'af_d2d1b_spinBox_4').setValue(self.tempEnd)
-			if self.decimalType == 1:
-				self._d(4, 'af_d2d1b_radio_1').setChecked(True)
-			else:
-				self._d(4, 'af_d2d1b_radio_2').setChecked(True)
 			self._d(1, 'af_d2d1b_next_button').clicked.connect(lambda: self._next(1))
 			self._d(1, 'af_d2d1b_back_button').clicked.connect(lambda: self._next(-1))
 		elif dialogIndex[0] == 8:
@@ -1058,7 +1074,7 @@ class AeroFoilDialog:
 			elif dialogIndex[0] == 5:
 				self.importFrom, self.mirroring = 1, False
 			elif dialogIndex[0] == 6:
-				self.lineStart, self.lineEnd, self.decimalType = 0, 0, 1
+				self.lineStart, self.lineEnd = 0, 0
 				self.tempStart, self.tempEnd, =  0, 0
 				self.midIndex1, self.midIndex2 = 0, 0
 			elif dialogIndex[0] == 7:
@@ -1129,10 +1145,6 @@ class AeroFoilDialog:
 				if tempVar3 == 0 or tempVar3 >= MIN_DATA_POINTS:
 					self.tempStart = self.lineStart = self._d(6, 'af_d2d1a_spinBox_1').value()
 					self.tempEnd   = self.lineEnd   = self._d(6, 'af_d2d1a_spinBox_2').value()
-					if self._d(4, 'af_d2d1a_radio_1').isChecked():
-						self.decimalType = 1
-					else:
-						self.decimalType = 2
 					_setDialogIndex (8)
 				else:
 					setAlertBox ("There must be a minimum of " + str(MIN_DATA_POINTS) + \
@@ -1148,10 +1160,6 @@ class AeroFoilDialog:
 						self.col2 = self._d(6, 'af_d2d1b_spinBox_2').value()
 						self.tempStart = self.row1 = self._d(6, 'af_d2d1b_spinBox_3').value()
 						self.tempEnd   = self.row2 = self._d(6, 'af_d2d1b_spinBox_4').value()
-						if self._d(4, 'af_d2d1b_radio_1').isChecked():
-							self.decimalType = 1
-						else:
-							self.decimalType = 2
 						_setDialogIndex (8)
 					else:
 						setAlertBox ("The two file columns cannot be the same !", True)
@@ -1494,11 +1502,8 @@ def _prepareAeroFoil (objRef):
 		count, tempVar, pointsInLine, pointsInLine_prev = 1, "", [], []
 		n_ = len(objRef.loadedFileContents)
 		for lineOrRow in objRef.loadedFileContents:
-			if objRef.decimalType == 1:
-				tempVar = lineOrRow
-			elif objRef.decimalType == 2:
-				tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else \
-				[element_.replace(",", ".") for element_ in lineOrRow]
+			tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else \
+			[element_.replace(",", ".") for element_ in lineOrRow]
 			tempVar = tempVar.replace("-.","-0.")
 			tempVar = tempVar.replace(" .","0.")
 			tempVar = "0" + tempVar if tempVar[0] == "." else tempVar
@@ -1829,17 +1834,13 @@ def _validateFile (objRef):
 	if i_start == 0:
 		i_start = i_end = 0
 		for lineOrRow in fileReader_:
-			if objRef.decimalType == 1:
-				tempVar = lineOrRow
-			elif objRef.decimalType == 2:
-				tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else [element_.replace(",", ".") for element_ in lineOrRow]
+			tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else [element_.replace(",", ".") for element_ in lineOrRow]
 			pointsInLine = re.findall(r"[+-]?\d+(?:\.\d+)?", tempVar) if objRef.importFrom == 1 else re.findall(r"[+-]?\d+(?:\.\d+)?", tempVar[objRef.col1-1] + " " + tempVar[objRef.col2-1])
 			if len (pointsInLine) == 2:
 				i_start = count if i_start == 0 else i_start
 				objRef.loadedFileContents.append (lineOrRow)
 			else:
 				if i_start != 0:
-					i_end = count - 1
 					break
 			if i_start != 0:
 				if tempStr == "":
@@ -1864,10 +1865,7 @@ def _validateFile (objRef):
 	else:
 		for lineOrRow in fileReader_:
 			if count >= i_start:
-				if objRef.decimalType == 1:
-					tempVar = lineOrRow
-				elif objRef.decimalType == 2:
-					tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else [element_.replace(",", ".") for element_ in lineOrRow]
+				tempVar = lineOrRow.replace(",", ".") if objRef.importFrom == 1 else [element_.replace(",", ".") for element_ in lineOrRow]
 				pointsInLine = re.findall(r"[+-]?\d+(?:\.\d+)?", tempVar) if objRef.importFrom == 1 else re.findall(r"[+-]?\d+(?:\.\d+)?", tempVar[objRef.col1-1] + " " + tempVar[objRef.col2-1])
 				if len (pointsInLine) == 2:
 					objRef.loadedFileContents.append (lineOrRow)
