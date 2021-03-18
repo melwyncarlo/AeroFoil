@@ -84,7 +84,6 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 - [ ] Add a preview of the data points and a small SVG post file upload
 - [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
 - [ ] Create a Python Console Run Command
-- [ ] Speed-up the process for large refinement values
 
 ### <br>Links
 [1] [Airfoil Tools](http://airfoiltools.com/) contains about 1,638 different airfoils.<br>
