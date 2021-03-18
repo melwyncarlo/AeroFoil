@@ -81,6 +81,7 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 - [X] Add the AeroFoil icon to the dialog boxes
 - [ ] Add the AeroFoil icon to objects in Tree View
 - [ ] Convert from Part :: Feature object to App :: FeaturePython object
+- [ ] Add a preview of the data points and a small SVG after uploading a file
 - [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
 - [ ] Create a Python Console Run Command
 
