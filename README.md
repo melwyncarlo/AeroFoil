@@ -74,13 +74,13 @@ For more information on the AeroFoil macro, refer to its [FreeCAD Macro Wiki Pag
 ### <br>Future works
 - [X] Fix Bugs (for FreeCAD v0.18 and v0.19)
 - [ ] Attempt, if possible, a complete CodeCov Coverage
-- [ ] Get the LGTM Alerts to 0, and Code Quality to A (preferably, to A+)
+- [X] Get the LGTM Alerts to 0, and Code Quality to A (preferably, to A+)
 - [ ] Implement automatic parsing of files
 - [ ] Add the 'search airfoil database' feature
 - [ ] ~~Add leading edge refinement (0c to 0.25c)~~
 - [X] Add the AeroFoil icon to the dialog boxes
-- [ ] Add the AeroFoil icon to objects in Tree View
-- [ ] Convert from Part :: Feature object to App :: FeaturePython object
+- [X] Add the AeroFoil icon to objects in Tree View
+- [X] Convert from Part :: Feature object to Part :: FeaturePython object
 - [ ] Add a preview of the data points and a small SVG post file upload
 - [ ] Separate the 'AeroFoil' and 'AeroFoilDialog' classes into two files
 - [ ] Create a Python Console Run Command
